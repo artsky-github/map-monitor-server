@@ -36,7 +36,7 @@ async function existsMapStatus() {
   return (await mapStatuses.findOne({ _id: os.hostname() })) !== null;
 }
 
-async function getMapStatus() {
+async function getMapStatus(osName) {
   console.log(
     "---------------------------------------------------------------------"
   );
@@ -46,7 +46,7 @@ async function getMapStatus() {
   console.log(
     "---------------------------------------------------------------------"
   );
-  return await mapStatuses.findOne({ _id: os.hostname() });
+  return await mapStatuses.findOne({ _id: osName });
 }
 
 module.exports = { insertMapStatus, existsMapStatus, getMapStatus };
