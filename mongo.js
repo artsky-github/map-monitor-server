@@ -23,20 +23,7 @@ async function insertMapStatus(obj) {
   }
 }
 
-async function existsMapStatus() {
-  console.log(
-    "---------------------------------------------------------------------"
-  );
-  console.log(
-    `${(date = new Date().toLocaleString())} : Finding entry in database...`
-  );
-  console.log(
-    "---------------------------------------------------------------------"
-  );
-  return (await mapStatuses.findOne({ _id: os.hostname() })) !== null;
-}
-
-async function getMapStatus(osName) {
+async function queryMapStatus(osName) {
   console.log(
     "---------------------------------------------------------------------"
   );
@@ -49,4 +36,4 @@ async function getMapStatus(osName) {
   return await mapStatuses.findOne({ _id: osName });
 }
 
-module.exports = { insertMapStatus, existsMapStatus, getMapStatus };
+module.exports = { insertMapStatus, queryMapStatus };
