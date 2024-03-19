@@ -1,7 +1,6 @@
 const express = require("express");
 const db = require("../model/mongo");
 const path = require("path");
-const ws = require("ws");
 const app = express();
 let date = new Date();
 
