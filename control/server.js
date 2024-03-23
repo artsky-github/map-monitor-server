@@ -6,8 +6,11 @@ let date = new Date();
 
 app.use(express.json());
 
+app.use(
+  "/bootstrap",
+  express.static(path.join(__dirname, "..", "node_modules/bootstrap/dist"))
+);
 app.use(express.static(path.join(__dirname, "..", "public")));
-app.use("/bootstrap", express.static(path.join(__dirname, "..", "node_modules/bootstrap/dist")));
 
 app.listen(3000, () => {
   console.log(
@@ -47,4 +50,3 @@ app.get("/get-map-data", (req, res) => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "view/index.html"));
 });
-

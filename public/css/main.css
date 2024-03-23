@@ -1,3 +1,57 @@
 .map-logo {
   width: 200px;
 }
+
+.table-head {
+  --bs-table-bg: #198754;
+  --bs-table-color: white;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.mark-icon {
+  width: 25px;
+}
+
+ul {
+  width: fit-content;
+  margin-inline: auto;
+  padding: 0;
+}
+
+.status-pill {
+  background-color: var(--bs-secondary);
+  width: min-content;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  padding: 5px;
+  padding-inline: 10px;
+  border-radius: 25px;
+}
+
+.status-pill.green {
+  background-color: var(--bs-green);
+}
+
+.status-pill.yellow {
+  background-color: var(--bs-yellow);
+}
+
+.status-pill.red {
+  background-color: var(--bs-red);
+}
+
+.paper-icon {
+  width: 50px;
+}
+
+.hide-row {
+  display: none;
+}

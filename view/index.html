@@ -3,20 +3,190 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" type="text/css" />
     <link rel="stylesheet" href="css/reset.css" type="text/css" />
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type = "text/css" />
+    <link
+      rel="stylesheet"
+      href="bootstrap/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
     <link rel="icon" href="images/status-favicon.ico" type="image/x-icon" />
     <title>MAP Status Monitor</title>
   </head>
   <body>
-    <nav class = "navbar bg-success">
-      <div class = "container d-flex justify-content-center">
-        <a class = "navbar-brand" href = "/">
+    <nav class="navbar bg-success">
+      <div class="container d-flex justify-content-center">
+        <a class="navbar-brand" href="/">
           <img class="map-logo" src="images/map-cutout.png" alt="MAP Cutout" />
-          <h2 class = "d-inline-block text-light">MAP Status Monitor</h2>
+          <h2 class="d-inline-block text-light">MAP Status Monitor</h2>
         </a>
       </div>
     </nav>
+    <div
+      class="container-sm mt-5 p-0 border border-2 border-success rounded overflow-hidden"
+    >
+      <table
+        class="table table-striped text-center m-0"
+        style="table-layout: fixed"
+      >
+        <thead class="table-head">
+          <tr>
+            <th scope="col">CUPPS Name</th>
+            <th scope="col">BT Load Path</th>
+            <th scope="col">BP Load Path A</th>
+            <th scope="col">BP Load Path B</th>
+            <th scope="col">BT Status</th>
+            <th scope="col">BP Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="clickable-row">
+            <td scope="row">SRQ1G02A</td>
+            <td>
+              <div class="flex-container">
+                <span>EMPTY</span>
+                <img
+                  class="mark-icon"
+                  src="images/red-mark.png"
+                  alt="Red Mark"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>LOW</span>
+                <img
+                  class="mark-icon"
+                  src="images/yellow-mark.png"
+                  alt="Yellow Mark"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>FULL</span>
+                <img
+                  class="mark-icon"
+                  src="images/green-mark.png"
+                  alt="Green Mark"
+                />
+              </div>
+            </td>
+            <td><div class="status-pill green">ONLINE</div></td>
+            <td>
+              <div class="status-pill red">OFFLINE</div>
+            </td>
+          </tr>
+          <tr class="hide-row">
+            <td>Last Update:</td>
+            <td>
+              <div class="flex-container">
+                <span>29/200</span
+                ><img
+                  class="paper-icon"
+                  src="images/bt-paper.png"
+                  alt="BT Paper"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>4985/5000</span
+                ><img
+                  class="paper-icon"
+                  src="images/bp-paper.png"
+                  alt="BP Paper"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>0/5000</span
+                ><img
+                  class="paper-icon"
+                  src="images/bp-paper.png"
+                  alt="BP Paper"
+                />
+              </div>
+            </td>
+            <td>READY</td>
+            <td>PAPER OUT, UNKNOWN, ERROR, RANDOM</td>
+          </tr>
+          <tr class="clickable-row">
+            <td scope="row">SRQ1G02A</td>
+            <td>
+              <div class="flex-container">
+                <span>EMPTY</span>
+                <img
+                  class="mark-icon"
+                  src="images/red-mark.png"
+                  alt="Red Mark"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>LOW</span>
+                <img
+                  class="mark-icon"
+                  src="images/yellow-mark.png"
+                  alt="Yellow Mark"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>FULL</span>
+                <img
+                  class="mark-icon"
+                  src="images/green-mark.png"
+                  alt="Green Mark"
+                />
+              </div>
+            </td>
+            <td><div class="status-pill green">ONLINE</div></td>
+            <td>
+              <div class="status-pill red">OFFLINE</div>
+            </td>
+          </tr>
+          <tr class="hide-row">
+            <td>Last Update:</td>
+            <td>
+              <div class="flex-container">
+                <span>29/200</span
+                ><img
+                  class="paper-icon"
+                  src="images/bt-paper.png"
+                  alt="BT Paper"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>4985/5000</span
+                ><img
+                  class="paper-icon"
+                  src="images/bp-paper.png"
+                  alt="BP Paper"
+                />
+              </div>
+            </td>
+            <td>
+              <div class="flex-container">
+                <span>0/5000</span
+                ><img
+                  class="paper-icon"
+                  src="images/bp-paper.png"
+                  alt="BP Paper"
+                />
+              </div>
+            </td>
+            <td>READY</td>
+            <td>PAPER OUT, UNKNOWN, ERROR, RANDOM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
+  <script src="js/table.js"></script>
 </html>
