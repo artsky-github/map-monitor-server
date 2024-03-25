@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("../model/mongo");
 const path = require("path");
+const WebSocket = require("ws");
 const app = express();
 let date = new Date();
 
@@ -12,7 +13,7 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
   console.log(
     "---------------------------------------------------------------------"
   );
@@ -23,11 +24,6 @@ app.listen(3000, () => {
   console.log(
     "---------------------------------------------------------------------"
   );
-});
-
-app.post("/post-map-data", (req, res) => {
-  db.insertMapStatus(req.body);
-  res.json(true);
 });
 
 app.get("/get-map-data", (req, res) => {
@@ -49,4 +45,35 @@ app.get("/get-map-data", (req, res) => {
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "view/index.html"));
+});
+
+const wss = new WebSocket.Server({ server: server });
+
+// WebSocket connection event
+wss.on("connection", (ws) => {
+  console.log("WebSocket client connected");
+  db.queryAll().then((mapStatuses) => {
+    ws.send(JSON.stringify(mapStatuses));
+  });
+
+  app.post("/post-map-data", (req, res) => {
+    db.insertMapStatus(req.body);
+    res.json(true);
+    db.queryAll().then((mapStatuses) => {
+      ws.send(JSON.stringify(mapStatuses));
+    });
+  });
+
+  // WebSocket message event
+  ws.on("message", (message) => {
+    console.log("Received: ", message.toString());
+
+    // Echo back the received message
+    ws.send(`Echo: ${message}`);
+  });
+
+  // WebSocket close event
+  ws.on("close", () => {
+    console.log("WebSocket client disconnected");
+  });
 });

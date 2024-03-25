@@ -1,10 +1,40 @@
+:root {
+  --color-pantone: #004d43;
+}
+
+.page-background {
+  background-color: #e8efed;
+}
+
 .map-logo {
   width: 200px;
 }
 
+@media screen and (max-width: 576px) {
+  .map-logo {
+    width: calc(200px - 100%);
+  }
+}
+
+.logo-text-shadow {
+  text-shadow: -2px 3px 3px black;
+}
+
+.nav-background {
+  background-color: var(--color-pantone);
+}
+
+table {
+  overflow-x: scroll;
+}
+
 .table-head {
-  --bs-table-bg: #198754;
-  --bs-table-color: white;
+  --bs-table-bg: var(--color-pantone);
+  --bs-table-color: var(--bs-white);
+}
+
+.container-shadow {
+  box-shadow: -3px 3px 3px gray;
 }
 
 .flex-container {
@@ -54,4 +84,9 @@ ul {
 
 .hide-row {
   display: none;
+}
+
+tr:hover:not(:nth-child(2n)) {
+  cursor: pointer;
+  --bs-table-striped-bg: lightgray;
 }

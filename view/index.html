@@ -13,25 +13,37 @@
     <link rel="icon" href="images/status-favicon.ico" type="image/x-icon" />
     <title>MAP Status Monitor</title>
   </head>
-  <body>
-    <nav class="navbar bg-success">
+  <body class="page-background">
+    <script>
+      const socket = new WebSocket("ws://localhost:3000"); // Change the URL accordingly
+
+      socket.addEventListener("open", (event) => {
+        console.log("WebSocket connection established");
+        socket.send("Hello WebSocket Server!");
+      });
+
+      socket.addEventListener("message", (event) => {
+        console.log(JSON.parse(event.data));
+      });
+    </script>
+    <nav class="navbar nav-background container-shadow">
       <div class="container d-flex justify-content-center">
         <a class="navbar-brand" href="/">
           <img class="map-logo" src="images/map-cutout.png" alt="MAP Cutout" />
-          <h2 class="d-inline-block text-light">MAP Status Monitor</h2>
+          <h2 class="d-inline-block text-light logo-text-shadow">
+            MAP Status Monitor
+          </h2>
         </a>
       </div>
     </nav>
-    <div
-      class="container-sm mt-5 p-0 border border-2 border-success rounded overflow-hidden"
-    >
+    <div class="container-sm mt-5 p-0 rounded container-shadow overflow-hidden">
       <table
         class="table table-striped text-center m-0"
         style="table-layout: fixed"
       >
         <thead class="table-head">
           <tr>
-            <th scope="col">CUPPS Name</th>
+            <th scope="col">Host Name</th>
             <th scope="col">BT Load Path</th>
             <th scope="col">BP Load Path A</th>
             <th scope="col">BP Load Path B</th>

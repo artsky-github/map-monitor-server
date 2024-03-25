@@ -36,4 +36,8 @@ async function queryMapStatus(osName) {
   return await mapStatuses.findOne({ _id: osName });
 }
 
-module.exports = { insertMapStatus, queryMapStatus };
+async function queryAll() {
+  return await mapStatuses.find().toArray();
+}
+
+module.exports = { insertMapStatus, queryMapStatus, queryAll };
