@@ -10,9 +10,18 @@
   width: 200px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 767px ) {
   .map-logo {
-    width: calc(200px - 100%);
+    width: 100px;
+  }
+  table {
+    font-size: 1.5vw; 
+  }
+  .mark-icon {
+    max-width: 3vw; 
+  }
+  .paper-icon {
+    max-width: 5vw; 
   }
 }
 
@@ -61,8 +70,8 @@ ul {
   margin-left: auto;
   margin-right: auto;
   color: white;
-  padding: 5px;
-  padding-inline: 10px;
+  padding: 2px; 
+  padding-inline: 10px; 
   border-radius: 25px;
 }
 
@@ -84,6 +93,10 @@ ul {
 
 .hide-row {
   display: none;
+}
+
+.border-pantone {
+  border-color: var(--color-pantone) !important; 
 }
 
 tr:hover:not(:nth-child(2n)) {
