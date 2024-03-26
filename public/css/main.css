@@ -23,18 +23,24 @@
   .paper-icon {
     max-width: 5vw; 
   }
-}
-
-.logo-text-shadow {
-  text-shadow: -2px 3px 3px black;
-}
-
-.nav-background {
-  background-color: var(--color-pantone);
+  h2 {
+    font-size: 14pt; 
+  }
+  .fill-screen {
+    min-height: calc(100vh - 259.5px) !important;
+  }
 }
 
 table {
-  overflow-x: scroll;
+  table-layout: fixed;
+}
+
+.text-shadow {
+  text-shadow: -2px 3px 3px black;
+}
+
+.container-background {
+  background-color: var(--color-pantone);
 }
 
 .table-head {
@@ -102,4 +108,15 @@ ul {
 tr:hover:not(:nth-child(2n)) {
   cursor: pointer;
   --bs-table-striped-bg: lightgray;
+}
+
+
+.footer {
+  --footer-size: 94px;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.fill-screen {
+  min-height: calc(100vh - 350.3px);
 }

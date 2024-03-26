@@ -26,20 +26,19 @@
         console.log(JSON.parse(event.data));
       });
     </script>
-    <nav class="navbar nav-background container-shadow">
+    <nav class="navbar container-background container-shadow">
       <div class="container d-flex justify-content-center">
         <a class="navbar-brand" href="/">
           <img class="map-logo" src="images/map-cutout.png" alt="MAP Cutout" />
-          <h2 class="d-inline-block text-light logo-text-shadow">
+          <h2 class="d-inline-block text-light text-shadow">
             MAP Status Monitor
           </h2>
         </a>
       </div>
     </nav>
-    <div class="container-sm mt-5 p-0 container-shadow rounded overflow-hidden">
+    <div class="container-sm mt-5 p-0 fill-screen">
       <table
-        class="table table-striped text-center m-0"
-        style="table-layout: fixed;"
+        class="table table-striped text-center m-0 container-shadow rounded overflow-hidden"
       >
         <thead class="table-head">
           <tr>
@@ -200,5 +199,6 @@
       </table>
     </div>
   </body>
+  <footer class = "footer container-background"><p class = "text-center text-light m-0 text-shadow">&copy Copyright 2024, Arthur Levitsky</p></footer>
   <script src="js/table.js"></script>
 </html>
