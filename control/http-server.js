@@ -2,8 +2,12 @@ const express = require("express");
 const db = require("../model/mongo");
 const path = require("path");
 const WebSocket = require("ws");
+const wss2 = require("./ws-server");
 const app = express();
 let date = new Date();
+
+
+wss2.createWSS();
 
 app.use(express.json());
 
@@ -19,7 +23,7 @@ const server = app.listen(3000, () => {
   );
   console.log(
     `${(date =
-      new Date().toLocaleString())} : Server is running on http://localhost:3000/`
+      new Date().toLocaleString())} : HTTP and WS Server is running on localhost:3000`
   );
   console.log(
     "---------------------------------------------------------------------"
