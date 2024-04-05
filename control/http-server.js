@@ -2,12 +2,7 @@ const express = require("express");
 const db = require("../model/mongo");
 const path = require("path");
 const WebSocket = require("ws");
-const wss2 = require("./ws-server");
 const app = express();
-let date = new Date();
-
-
-wss2.createWSS();
 
 app.use(express.json());
 
@@ -22,29 +17,11 @@ const server = app.listen(3000, () => {
     "---------------------------------------------------------------------"
   );
   console.log(
-    `${(date =
-      new Date().toLocaleString())} : HTTP and WS Server is running on localhost:3000`
+    `${new Date().toLocaleString()} : HTTP and WS Server is running on localhost:3000`
   );
   console.log(
     "---------------------------------------------------------------------"
   );
-});
-
-app.get("/get-map-data", (req, res) => {
-  const osNameParam = Object.keys(req.query)[0];
-  console.log(
-    "---------------------------------------------------------------------"
-  );
-  console.log(
-    `${(date =
-      new Date().toLocaleString())} : Obtained GET Request from: ${osNameParam}`
-  );
-  console.log(
-    "---------------------------------------------------------------------"
-  );
-  db.queryMapStatus(osNameParam).then((dbMapStatus) => {
-    res.json(dbMapStatus);
-  });
 });
 
 app.get("/", (req, res) => {
@@ -56,17 +33,16 @@ const wss = new WebSocket.Server({ server: server });
 // WebSocket connection event
 wss.on("connection", (ws) => {
   console.log("WebSocket client connected");
-  db.queryAll().then((mapStatuses) => {
+
+  db.queryAllMapStatuses().then((mapStatuses) => {
     ws.send(JSON.stringify(mapStatuses));
   });
 
-  app.post("/post-map-data", (req, res) => {
-    db.insertMapStatus(req.body);
-    res.json(true);
-    db.queryAll().then((mapStatuses) => {
+  setInterval(() => {
+    db.queryAllMapStatuses().then((mapStatuses) => {
       ws.send(JSON.stringify(mapStatuses));
     });
-  });
+  }, 15000);
 
   // WebSocket message event
   ws.on("message", (message) => {

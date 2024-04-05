@@ -2,8 +2,10 @@ const { MongoClient } = require("mongodb");
 const os = require("os");
 let date = new Date();
 
-const uri = "mongodb://localhost:27017"; // local uri for testing
-const mapStatuses = new MongoClient(uri).db("MapStatusDB").collection("active");
+const dbURI = "mongodb://localhost:27017"; // local uri for testing
+const mapStatuses = new MongoClient(dbURI)
+  .db("MapStatusDB")
+  .collection("active");
 
 async function insertMapStatus(obj) {
   console.log(
@@ -36,8 +38,8 @@ async function queryMapStatus(osName) {
   return await mapStatuses.findOne({ _id: osName });
 }
 
-async function queryAll() {
+async function queryAllMapStatuses() {
   return await mapStatuses.find().toArray();
 }
 
-module.exports = { insertMapStatus, queryMapStatus, queryAll };
+module.exports = { insertMapStatus, queryMapStatus, queryAllMapStatuses };
