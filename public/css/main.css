@@ -105,6 +105,9 @@ ul {
   display: none;
 }
 
+.show-row {
+}
+
 .border-pantone {
   border-color: var(--color-pantone) !important;
   background: var(--color-pantone);

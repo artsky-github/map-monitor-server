@@ -8,8 +8,20 @@ socket.addEventListener("open", (event) => {
 
 socket.addEventListener("message", (event) => {
   console.log(`${new Date().toLocaleString()}: Table Data Refreshed`);
-  console.log(document.getElementsByTagName("tbody")[0]);
+  let bodyRows = document.querySelector("tbody").cloneNode(true);
+  bodyRows = bodyRows.children;
+  console.log(bodyRows);
+  let indexOfToggled = [];
+  for (let i = 0; i < bodyRows.length; i++) {
+    if (bodyRows[i].className === "show-row") {
+      indexOfToggled.push(i);
+    }
+  }
+  document.getElementsByTagName("tbody")[0].innerHTML = "";
   generateTable(JSON.parse(event.data));
+  for (let index of indexOfToggled) {
+    document.querySelector("tbody").children[index].className = "show-row";
+  }
 });
 
 function generateTable(socketDataArray) {
@@ -156,6 +168,7 @@ function generateTable(socketDataArray) {
 
     showRow.addEventListener("click", (e) => {
       hideRow.classList.toggle("hide-row");
+      hideRow.classList.toggle("show-row");
     });
 
     tbody.appendChild(showRow);
