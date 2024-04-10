@@ -10,27 +10,27 @@
   width: 200px;
 }
 
-@media screen and (max-width: 767px ) {
+@media screen and (max-width: 767px) {
   .map-logo {
     width: 100px;
   }
   table {
-    font-size: 2vw; 
+    font-size: 2vw;
   }
   .mark-icon {
-    max-width: 2.5vw; 
+    max-width: 2.5vw;
   }
   .paper-icon {
-    max-width: 5vw; 
+    max-width: 5vw;
   }
   h2 {
-    font-size: 14pt; 
+    font-size: 14pt;
   }
   .fill-screen {
     min-height: calc(100vh - 259.5px) !important;
   }
   .status-pill {
-    padding: 5% !important; 
+    padding: 5% !important;
     padding-inline: 10% !important;
   }
 }
@@ -80,8 +80,8 @@ ul {
   margin-left: auto;
   margin-right: auto;
   color: white;
-  padding: 2px; 
-  padding-inline: 10px; 
+  padding: 2px;
+  padding-inline: 10px;
   border-radius: 25px;
 }
 
@@ -106,7 +106,7 @@ ul {
 }
 
 .border-pantone {
-  border-color: var(--color-pantone) !important; 
+  border-color: var(--color-pantone) !important;
   background: var(--color-pantone);
 }
 
@@ -116,8 +116,8 @@ tbody > tr:hover:not(:nth-child(2n)) {
 }
 
 .grid-footer {
-  display: grid; 
-  grid-template-rows: 1fr; 
+  display: grid;
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   --footer-size: 94px;
   margin-top: 50px;
@@ -127,4 +127,3 @@ tbody > tr:hover:not(:nth-child(2n)) {
 .fill-screen {
   min-height: calc(100vh - 350.3px);
 }
-

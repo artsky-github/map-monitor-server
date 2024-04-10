@@ -8,7 +8,7 @@ socket.addEventListener("open", (event) => {
 
 socket.addEventListener("message", (event) => {
   console.log(`${new Date().toLocaleString()}: Table Data Refreshed`);
-  document.getElementsByTagName("tbody")[0].innerHTML = "";
+  console.log(document.getElementsByTagName("tbody")[0]);
   generateTable(JSON.parse(event.data));
 });
 
@@ -153,16 +153,13 @@ function generateTable(socketDataArray) {
       hideRow.appendChild(convertToHtml(hiddenRow[index]));
     }
     const tbody = document.getElementsByTagName("tbody")[0];
+
+    showRow.addEventListener("click", (e) => {
+      hideRow.classList.toggle("hide-row");
+    });
+
     tbody.appendChild(showRow);
     tbody.appendChild(hideRow);
-
-    const rows = document.querySelectorAll(".clickable-row");
-
-    for (let row of rows) {
-      row.addEventListener("click", (e) => {
-        row.nextElementSibling.classList.toggle("hide-row");
-      });
-    }
   }
 
   function convertToHtml(htmlData, previousTag) {
