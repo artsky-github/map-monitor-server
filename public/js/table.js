@@ -127,13 +127,13 @@ function generateTable(socketDataArray) {
         setImgPath(index.btLoadPath)[0],
         setImgPath(index.btLoadPath)[1]
       ),
-      new StatusCell(setPillColor(index.bpStatus.desc), index.bpStatus.desc),
       new StatusCell(setPillColor(index.btStatus.desc), index.btStatus.desc),
+      new StatusCell(setPillColor(index.bpStatus.desc), index.bpStatus.desc),
     ];
 
     const hiddenRow = [
       new HiddenRow(),
-      new TimeCell(new Date().toLocaleString()),
+      new TimeCell(index.lastUpdated),
       new PaperCell(
         index.btRemaining,
         200,

@@ -8,16 +8,10 @@ wss.on("connection", function connection(ws) {
   console.log("Client connected");
 
   ws.on("message", (message) => {
-    message = message.toString();
-    try {
-      db.insertMapStatus(JSON.parse(message));
-      ws.send("Success");
-    } catch {
-      db.queryMapStatus(message).then((mapStatus) => {
-        ws.send(JSON.stringify(mapStatus));
-      });
-    }
+    console.log("Recieved from client: " + message);
+    db.insertMapStatus(JSON.parse(message));
   });
+
   ws.on("close", function close() {
     console.log("Client disconnected");
   });
