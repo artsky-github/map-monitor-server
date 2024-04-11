@@ -10,7 +10,6 @@ socket.addEventListener("message", (event) => {
   console.log(`${new Date().toLocaleString()}: Table Data Refreshed`);
   let bodyRows = document.querySelector("tbody").cloneNode(true);
   bodyRows = bodyRows.children;
-  console.log(bodyRows);
   let indexOfToggled = [];
   for (let i = 0; i < bodyRows.length; i++) {
     if (bodyRows[i].className === "show-row") {
@@ -113,6 +112,11 @@ function generateTable(socketDataArray) {
       new TableRow(),
       new HostCell(index._id),
       new StockCell(
+        index.btLoadPath,
+        setImgPath(index.btLoadPath)[0],
+        setImgPath(index.btLoadPath)[1]
+      ),
+      new StockCell(
         index.bpLoadPathA,
         setImgPath(index.bpLoadPathA)[0],
         setImgPath(index.bpLoadPathA)[1]
@@ -121,11 +125,6 @@ function generateTable(socketDataArray) {
         index.bpLoadPathB,
         setImgPath(index.bpLoadPathB)[0],
         setImgPath(index.bpLoadPathB)[1]
-      ),
-      new StockCell(
-        index.btLoadPath,
-        setImgPath(index.btLoadPath)[0],
-        setImgPath(index.btLoadPath)[1]
       ),
       new StatusCell(setPillColor(index.btStatus.desc), index.btStatus.desc),
       new StatusCell(setPillColor(index.bpStatus.desc), index.bpStatus.desc),
