@@ -38,7 +38,7 @@ wss.on("connection", (ws) => {
     ws.send(JSON.stringify(mapStatuses));
   });
 
-  setInterval(() => {
+  const refreshData = setInterval(() => {
     db.queryAllMapStatuses().then((mapStatuses) => {
       ws.send(JSON.stringify(mapStatuses));
     });
@@ -55,5 +55,6 @@ wss.on("connection", (ws) => {
   // WebSocket close event
   ws.on("close", () => {
     console.log("WebSocket client disconnected");
+    clearInterval(refreshData);
   });
 });
