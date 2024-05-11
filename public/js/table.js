@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://localhost:3000"); // Change the URL accordingly
+const socket = new WebSocket("ws://localhost:3000");
 
 socket.addEventListener("open", (event) => {
   console.log(
@@ -24,7 +24,7 @@ socket.addEventListener("message", (event) => {
 });
 
 function generateTable(socketDataArray) {
-  function TableRow(hostName) {
+  function ShownRow() {
     this.tr = ["class", "clickable-row"];
   }
   function HostCell(hostName) {
@@ -89,10 +89,17 @@ function generateTable(socketDataArray) {
   }
 
   function setPillColor(deviceStatus) {
-    if (deviceStatus === "ONLINE") {
-      return "green";
-    } else {
-      return "red";
+    switch(deviceStatus) {
+      case "ONLINE":
+        return "green";
+      case "INIT":
+      case "PAPER OUT":
+        return "yellow";
+      case "UNKNOWN":
+        return "blue";
+      case "OFFLINE":
+      default:
+        return "red";
     }
   }
 
@@ -109,7 +116,7 @@ function generateTable(socketDataArray) {
 
   for (let index of socketDataArray) {
     const shownRow = [
-      new TableRow(),
+      new ShownRow(),
       new HostCell(index._id),
       new StockCell(
         index.btLoadPath,
@@ -154,9 +161,10 @@ function generateTable(socketDataArray) {
       new CodeCell(mergeStatusCodes(index.btStatus)),
       new CodeCell(mergeStatusCodes(index.bpStatus)),
     ];
-
+    
     const showRow = convertToHtml(shownRow[0]);
     const hideRow = convertToHtml(hiddenRow[0]);
+
     for (let index = 1; index < shownRow.length; index++) {
       showRow.appendChild(convertToHtml(shownRow[index]));
     }

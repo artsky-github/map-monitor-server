@@ -1,3 +1,4 @@
+require("dotenv").config({path : "../.env"}); 
 const express = require("express");
 const db = require("../model/mongo");
 const path = require("path");
@@ -12,7 +13,7 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-const server = app.listen(3000, () => {
+const server = app.listen(process.env.HTTP_PORT, () => {
   console.log(
     "---------------------------------------------------------------------"
   );
