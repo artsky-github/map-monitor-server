@@ -1,8 +1,4 @@
-const WebSocketServer = {
-  WSS_IP: "127.0.0.1",
-  WSS_PORT: "443"
-}
-const socket = new WebSocket(`wss://${WebSocketServer.WSS_IP}:${WebSocketServer.WSS_PORT}`);
+const socket = new WebSocket(`wss://${location.host}`);
 
 socket.addEventListener("open", (event) => {
   console.log(
@@ -93,7 +89,7 @@ function generateTable(socketDataArray) {
   }
 
   function setPillColor(deviceStatus) {
-    switch(deviceStatus) {
+    switch (deviceStatus) {
       case "ONLINE":
         return "green";
       case "INIT":
@@ -165,7 +161,7 @@ function generateTable(socketDataArray) {
       new CodeCell(mergeStatusCodes(index.btStatus)),
       new CodeCell(mergeStatusCodes(index.bpStatus)),
     ];
-    
+
     const showRow = convertToHtml(shownRow[0]);
     const hideRow = convertToHtml(hiddenRow[0]);
 
