@@ -1,8 +1,9 @@
+require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const os = require("os");
 let date = new Date();
 
-const dbURI = "mongodb://localhost:27017"; // local uri for testing
+const dbURI = `mongodb://${process.env.DB_IP}:${process.env.DB_PORT}`; // local uri for testing
 
 let mapStatuses;
 try {

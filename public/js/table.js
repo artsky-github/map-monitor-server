@@ -1,4 +1,8 @@
-const socket = new WebSocket("ws://localhost:3000");
+const WebSocketServer = {
+  WSS_IP: "127.0.0.1",
+  WSS_PORT: "443"
+}
+const socket = new WebSocket(`wss://${WebSocketServer.WSS_IP}:${WebSocketServer.WSS_PORT}`);
 
 socket.addEventListener("open", (event) => {
   console.log(
