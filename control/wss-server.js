@@ -5,8 +5,15 @@ const fs = require("fs");
 const WebSocket = require("ws");
 const https = require("https");
 
-const keyFile = path.join(__dirname, process.env.HTTPS_KEY_PATH);
-const certFile = path.join(__dirname, process.env.HTTPS_CERT_PATH);
+const HTTPS_IP = process.env.HTTPS_IP;
+const HTTPS_PORT = process.env.HTTPS_PORT;
+const ROOT_KEY_PATH = process.env.ROOT_KEY_PATH;
+const ROOT_CERT_PATH = process.env.ROOT_CERT_PATH;
+
+const keyFile = path.join(__dirname, "..", ROOT_KEY_PATH);
+const certFile = path.join(__dirname, "..", ROOT_CERT_PATH);
+
+const wss = createSecureServerWS(keyFile, certFile);
 
 // Creates an HTTPS server that upgrades to WSS.
 function createSecureServerWS(keyFile, certFile) {
@@ -14,14 +21,12 @@ function createSecureServerWS(keyFile, certFile) {
     key: fs.readFileSync(keyFile),
     cert: fs.readFileSync(certFile),
   });
-  httpsServer.listen(process.env.HTTPS_PORT, process.env.HTTPS_IP);
+  httpsServer.listen(HTTPS_PORT, HTTPS_IP);
   return new WebSocket.Server({ server: httpsServer });
 }
 
-const wss = createSecureServerWS(keyFile, certFile);
-
+// On connection, begin feeding data in intervals.
 wss.on("connection", (ws) => {
-  // On connection, begin feeding data in intervals.
   const timelySendData = setInterval(() => {
     db.getAllHostData().then((response) => {
       ws.send(JSON.stringify(response));

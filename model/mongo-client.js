@@ -1,20 +1,30 @@
-require("dotenv").config();
 const { MongoClient } = require("mongodb");
-const os = require("os");
-let date = new Date();
 
-const dbURI = `mongodb://${process.env.DB_IP}:${process.env.DB_PORT}`; // local uri for testing
+const DB_IP = process.env.DB_IP;
+const DB_PORT = process.env.DB_PORT;
+const DB_NAME = process.env.DB_NAME;
 
-let mapMonitorDB;
-try {
-  mapMonitorDB = new MongoClient(dbURI).db("MapMonitor");
-} catch (error) {
-  console.log(error);
+const dbUri = `mongodb://${DB_IP}:${DB_PORT}`;
+const db = createMongoClient();
+const dbCollectionsPromise = getCollections(db);
+
+// Asynchronously get database collection names.
+function getCollections(db) {
+  return db.listCollections().toArray();
+}
+
+// Create Mongo client connection.
+function createMongoClient() {
+  try {
+    return new MongoClient(dbUri).db(DB_NAME);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // Aggregation pipeline that joins two collections and ignores same key value pairs.
 function joinTwoCollections(firstCollection, secondCollection) {
-  return mapMonitorDB
+  return db
     .collection(firstCollection)
     .aggregate([
       {
@@ -37,10 +47,11 @@ function joinTwoCollections(firstCollection, secondCollection) {
     .toArray();
 }
 
-// Obtain all the
-function getAllHostData() {
+// Obtain all the merged collections of client MAP data.
+async function getAllHostData() {
   try {
-    return joinTwoCollections("counts", "statuses");
+    const dbCollections = await dbCollectionsPromise;
+    return joinTwoCollections(dbCollections[0].name, dbCollections[1].name);
   } catch (error) {
     console.error(error);
   }
