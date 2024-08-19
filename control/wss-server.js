@@ -31,7 +31,7 @@ wss.on("connection", (ws) => {
     db.getAllHostData().then((response) => {
       ws.send(JSON.stringify(response));
     });
-  }, 15000);
+  }, 45000);
 
   // When connection closes, GC the Timeout object.
   ws.on("close", () => {
