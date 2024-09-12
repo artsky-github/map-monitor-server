@@ -27,6 +27,11 @@ function createSecureServerWS(keyFile, certFile) {
 
 // On connection, begin feeding data in intervals.
 wss.on("connection", (ws) => {
+
+  db.getAllHostData().then((response) => {
+    ws.send(JSON.stringify(response));
+  })
+
   const timelySendData = setInterval(() => {
     db.getAllHostData().then((response) => {
       ws.send(JSON.stringify(response));
