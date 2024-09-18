@@ -25,8 +25,7 @@ function createMongoClient() {
 // Aggregation pipeline that joins two collections and ignores same key value pairs.
 function joinTwoCollections(firstCollection, secondCollection) {
   return db
-    .collection(firstCollection)
-    .aggregate([
+    .collection(firstCollection).aggregate([
       {
         $lookup: {
           from: secondCollection,
@@ -43,12 +42,12 @@ function joinTwoCollections(firstCollection, secondCollection) {
         },
       },
       { $project: { recordFromSC: 0 } },
-    ])
-    .toArray();
+      { $sort: {_id: 1}}
+    ]).toArray();
 }
 
 // Obtain all the merged collections of client MAP data.
-async function getAllHostData() {
+async function getAllSortedHostData() {
   try {
     const dbCollections = await dbCollectionsPromise;
     return joinTwoCollections(dbCollections[0].name, dbCollections[1].name);
@@ -57,4 +56,4 @@ async function getAllHostData() {
   }
 }
 
-module.exports = { getAllHostData };
+module.exports = { getAllSortedHostData };

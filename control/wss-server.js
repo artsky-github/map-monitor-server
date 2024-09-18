@@ -28,15 +28,15 @@ function createSecureServerWS(keyFile, certFile) {
 // On connection, begin feeding data in intervals.
 wss.on("connection", (ws) => {
 
-  db.getAllHostData().then((response) => {
+  db.getAllSortedHostData().then((response) => {
     ws.send(JSON.stringify(response));
   })
 
   const timelySendData = setInterval(() => {
-    db.getAllHostData().then((response) => {
+    db.getAllSortedHostData().then((response) => {
       ws.send(JSON.stringify(response));
     });
-  }, 45000);
+  }, 60000);
 
   // When connection closes, GC the Timeout object.
   ws.on("close", () => {
