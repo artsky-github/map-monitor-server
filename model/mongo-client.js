@@ -34,6 +34,11 @@ function joinTwoCollections(firstCollection, secondCollection) {
           as: "recordFromSC",
         },
       },
+      { 
+        $project: {
+        "recordFromSC.reqSuccess" : 0
+        }
+      },
       {
         $replaceRoot: {
           newRoot: {
@@ -50,7 +55,7 @@ function joinTwoCollections(firstCollection, secondCollection) {
 async function getAllSortedHostData() {
   try {
     const dbCollections = await dbCollectionsPromise;
-    return joinTwoCollections(dbCollections[0].name, dbCollections[1].name);
+    return joinTwoCollections(dbCollections[1].name, dbCollections[0].name);
   } catch (error) {
     console.error(error);
   }
